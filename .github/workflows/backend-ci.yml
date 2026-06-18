@@ -26,7 +26,16 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Use public NuGet feed
-        run: dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
+        run: |
+          cat > NuGet.config << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <clear />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+            </packageSources>
+          </configuration>
+          EOF
         working-directory: wright-brothers-backend
 
       - name: Restore dependencies
