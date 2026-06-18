@@ -13,7 +13,7 @@ test('should navigate when clicking on a plane', async ({ page, mount }) => {
     hooksConfig: { routing: true },
   });
 
-  await component.locator('li').nth(0).click();
+  await component.locator('[class*="cursor-pointer"]').nth(0).click();
 
   await expect(page).toHaveURL('/planes/1', { timeout: 5000 });
 });
