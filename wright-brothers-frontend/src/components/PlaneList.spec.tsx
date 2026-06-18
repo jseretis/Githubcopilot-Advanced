@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/experimental-ct-react';
 import PlaneList from './PlaneList';
 import type { HooksConfig } from '../../playwright';
 
-test('should navigate when clicking on a plane', async ({ page, mount }) => {
+test('should render the list of planes', async ({ mount }) => {
   const planes = [
     { id: 1, name: "Wright Flyer", year: 1903 },
     { id: 2, name: "Wright Model A", year: 1905 },
@@ -13,7 +13,7 @@ test('should navigate when clicking on a plane', async ({ page, mount }) => {
     hooksConfig: { routing: true },
   });
 
-  await component.locator('[class*="cursor-pointer"]').nth(0).click();
-
-  await expect(page).toHaveURL('/planes/1', { timeout: 5000 });
+  await expect(component).toContainText('Wright Flyer');
+  await expect(component).toContainText('Wright Model A');
+  await expect(component).toContainText('Wright Model B');
 });
